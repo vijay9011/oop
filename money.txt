@@ -1,0 +1,75 @@
+public class Money {
+    private int rupees;
+    private int paisa;
+    
+    public Money() {
+        this.rupees = 0;
+        this.paisa = 0;
+    }
+    
+    public Money(int rupees, int paisa) {
+        this.rupees = rupees;
+        this.paisa = paisa;
+        normalize();
+    }
+
+    public int getRupees() {
+        return rupees;
+    }
+
+    public void setRupees(int rupees) {
+        this.rupees = rupees;
+    }
+
+    public int getPaisa() {
+        return paisa;
+    }
+
+    public void setPaisa(int paisa) {
+        this.paisa = paisa;
+        normalize();
+    }
+
+    public void add(Money other) {
+        this.rupees += other.getRupees();
+        this.paisa += other.getPaisa();
+        normalize();
+    }
+
+    public void subtract(Money other) {
+        this.rupees -= other.getRupees();
+        this.paisa -= other.getPaisa();
+        normalize();
+    }
+
+    private void normalize() {
+        if (this.paisa >= 100) {
+            this.rupees += this.paisa / 100;
+            this.paisa = this.paisa % 100;
+        } else if (this.paisa < 0) {
+            int borrow = (Math.abs(this.paisa) / 100) + 1;
+            this.rupees -= borrow;
+            this.paisa += borrow * 100;
+        }
+
+        if (this.rupees < 0 && this.paisa > 0) {
+            this.rupees += 1;
+            this.paisa -= 100;
+        }
+    }
+
+    public void display() {
+        System.out.println("Rupees: " + rupees + ", Paisa: " + paisa);
+    }
+
+    public static void main(String[] args) {
+        Money money1 = new Money(5, 150);
+        Money money2 = new Money(3, 75);  
+
+        money1.add(money2); 
+        money1.display();
+
+        money1.subtract(new Money(2, 50)); 
+        money1.display();
+    }
+}

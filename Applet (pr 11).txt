@@ -1,0 +1,30 @@
+import java.applet.Applet;
+import java.awt.Font;
+import java.awt.Graphics;
+
+public class TextDisplayApplet extends Applet {
+    @Override
+    public void paint(Graphics g) {
+               Font font = new Font("Arial", Font.BOLD | Font.ITALIC, 24);
+        g.setFont(font);
+
+           g.drawString("Hello, World!", 50, 50);
+    }
+}
+
+
+
+//
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applet Text Display</title>
+</head>
+<body>
+    <applet code="TextDisplayApplet.class" width="300" height="100">
+        Your browser does not support Java applets.
+    </applet>
+</body>
+</html>
+

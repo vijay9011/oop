@@ -1,0 +1,72 @@
+interface BankTransaction {
+    void deposit(double amount);
+    void withdraw(double amount);
+}
+class SavingsAccount implements BankTransaction {
+    private double balance;
+    public SavingsAccount() {
+        this.balance = 0;
+    }
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: Rs." + amount);
+    }
+    @Override
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn: Rs." + amount);
+        } else {
+            System.out.println("Insufficient balance!");
+        }
+    }
+    public double calculateInterest(double rate) {
+        return balance * rate / 100;
+    }
+}
+class CurrentAccount implements BankTransaction {
+    private double balance;
+    private static final double MIN_BALANCE = 2000;
+    public CurrentAccount() {
+        this.balance = MIN_BALANCE;
+    }
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: Rs." + amount);
+    }
+    @Override
+    public void withdraw(double amount) {
+        if (balance - amount >= MIN_BALANCE) {
+            balance -= amount;
+            System.out.println("Withdrawn: Rs." + amount);
+        } else {
+            System.out.println("Cannot withdraw! Minimum balance should be maintained.");
+        }
+    }
+}
+class RateOfInterest {
+    public double calculateInterest(BankTransaction account, double rate) {
+        if (account instanceof SavingsAccount) {
+            return ((SavingsAccount) account).calculateInterest(rate);
+        } else {
+            System.out.println("Interest calculation not applicable for Current Account.");
+            return 0;
+        }
+    }
+}
+
+public class BankTransactionDemo {
+    public static void main(String[] args) {
+        SavingsAccount savingsAccount = new SavingsAccount();
+        CurrentAccount currentAccount = new CurrentAccount();
+        System.out.println("Savings Account Transactions:");
+        savingsAccount.deposit(5000);
+        savingsAccount.withdraw(2000);
+        System.out.println("Interest: Rs." + new RateOfInterest().calculateInterest(savingsAccount, 5));
+        System.out.println("\nCurrent Account Transactions:");
+        currentAccount.deposit(3000);
+        currentAccount.withdraw(1000);
+    }
+}

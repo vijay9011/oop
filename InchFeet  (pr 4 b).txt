@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+class InchFeet {
+    private int feet;
+    private int inches;
+
+    public InchFeet(int feet, int inches) {
+        this.feet = feet;
+        this.inches = inches;
+        normalize();
+    }
+    private void normalize() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches = inches % 12;
+        }
+    }
+    public InchFeet add(InchFeet other) {
+        int totalFeet = this.feet + other.feet;
+        int totalInches = this.inches + other.inches;
+        return new InchFeet(totalFeet, totalInches);
+    }
+    public InchFeet subtract(InchFeet other) {
+        int totalInches1 = this.feet * 12 + this.inches;
+        int totalInches2 = other.feet * 12 + other.inches;
+        int diffInches = totalInches1 - totalInches2;
+
+        if (diffInches < 0) {
+            diffInches = -diffInches;
+        }
+
+        int diffFeet = diffInches / 12;
+        int diffRemainingInches = diffInches % 12;
+        return new InchFeet(diffFeet, diffRemainingInches);
+    }
+
+    public void display() {
+        System.out.println(feet + " feet " + inches + " inches");
+    }
+}
+
+public class DistanceOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the feet part of the first distance: ");
+        int feet1 = scanner.nextInt();
+        System.out.print("Enter the inches part of the first distance: ");
+        int inches1 = scanner.nextInt();
+
+        System.out.print("Enter the feet part of the second distance: ");
+        int feet2 = scanner.nextInt();
+        System.out.print("Enter the inches part of the second distance: ");
+        int inches2 = scanner.nextInt();
+        InchFeet distance1 = new InchFeet(feet1, inches1);
+        InchFeet distance2 = new InchFeet(feet2, inches2);
+        InchFeet totalDistance = distance1.add(distance2);
+        System.out.print("Total Distance: ");
+        totalDistance.display();
+        InchFeet differenceDistance = distance1.subtract(distance2);
+        System.out.print("Difference Distance: ");
+        differenceDistance.display();
+
+        scanner.close();
+    }
+}

@@ -1,0 +1,22 @@
+public class SalesCalculator {
+    public static void main(String[] args) {
+        double baseSalary = 5000.0;
+        double targetEarnings = 30000.0;
+        double commissionRate1 = 0.08;
+        double commissionRate2 = 0.10;
+        double commissionRate3 = 0.12;
+        double salesAmount1 = 5000.0;
+        double salesAmount2 = 10000.0;
+        double requiredCommission = targetEarnings - baseSalary;
+        double totalSales = 0.0;
+       
+        if (requiredCommission <= salesAmount1 * commissionRate1) {
+            totalSales = requiredCommission / commissionRate1;
+        } else if (requiredCommission <= (salesAmount1 * commissionRate1) + ((salesAmount2 - salesAmount1) * commissionRate2)) {
+            totalSales = salesAmount1 + (requiredCommission - (salesAmount1 * commissionRate1)) / commissionRate2;
+        } else {
+            totalSales = salesAmount2 + (requiredCommission - (salesAmount1 * commissionRate1) - ((salesAmount2 - salesAmount1) * commissionRate2)) / commissionRate3;
+        }
+        System.out.printf("The minimum amount of sales needed to earn $30,000 is $%.2f\n", totalSales);
+    }
+}

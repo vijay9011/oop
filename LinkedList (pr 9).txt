@@ -1,0 +1,18 @@
+import java.util.LinkedList;
+
+public class JavaLinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        linkedList.add(4);
+        linkedList.add(5);
+        System.out.println("LinkedList after adding elements: " + linkedList);
+        System.out.println("Element at index 2: " + linkedList.get(2));
+        linkedList.set(3, 99);
+        System.out.println("LinkedList after changing element at index 3: " + linkedList);
+        linkedList.remove(1);
+        System.out.println("LinkedList after removing element at index 1: " + linkedList);
+    }
+}

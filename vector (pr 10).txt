@@ -1,0 +1,14 @@
+import java.util.Vector;
+public class VectorExample {
+    public static void main(String[] args) {
+        Vector<Object> vector = new Vector<>();
+        vector.add("Hello");
+        vector.add(123);
+        vector.add(3.14);
+        vector.add(true);
+        System.out.println("Stored objects in the Vector:");
+        for (Object obj : vector) {
+            System.out.println(obj);
+        }
+    }
+}

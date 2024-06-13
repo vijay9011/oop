@@ -1,0 +1,46 @@
+class Publisher {
+    private String publisherName;
+    private String authorName;
+    public Publisher(String publisherName, String authorName) {
+        this.publisherName = publisherName;
+        this.authorName = authorName;
+    }
+    public String getPublisherName() {
+        return publisherName;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+    public void displayDetails() {
+        System.out.println("Publisher Name: " + publisherName);
+        System.out.println("Author Name: " + authorName);
+    }
+}
+class Book extends Publisher {
+    private String bookTitle;
+    private double bookPrice;
+    public Book(String publisherName, String authorName, String bookTitle, double bookPrice) {
+        super(publisherName, authorName);
+        this.bookTitle = bookTitle;
+        this.bookPrice = bookPrice;
+    }
+    public String getBookTitle() {
+        return bookTitle;
+    }
+    public double getBookPrice() {
+        return bookPrice;
+    }
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Book Title: " + bookTitle);
+        System.out.println("Book Price: " + bookPrice);
+    }
+}
+public class PublisherBookDetails {
+    public static void main(String[] args) {
+        Book book = new Book("Penguin Random House", "J.K. Rowling", "Harry Potter", 29.99);
+        book.displayDetails();
+    }
+}
